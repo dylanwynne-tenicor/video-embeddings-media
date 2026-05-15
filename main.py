@@ -302,7 +302,7 @@ class Indexer:
 
         scene = self.table.search().where(f"thumbnail_path = '{thumbnail_path}'").to_pandas()
         if scene.empty:
-            return "ERROR: Scene not found."
+            print(f"ERROR: Scene not found. {thumbnail_path}")
 
         if scene.iloc[0]["tags"] is None:
             tags = [tag]
@@ -315,6 +315,7 @@ class Indexer:
             self.table.update(where=f"thumbnail_path = '{thumbnail_path}'", values_sql={ "tags": f"make_array({quoted})" })
 
     def tag_clips(self, thumbnail_path_list, tags):
+        print(f"Tagging {thumbnail_path_list} with {tags}")
         for tag in tags:
             for thumbnail_path in thumbnail_path_list:
                 self.tag_clip(thumbnail_path, tag)
