@@ -305,7 +305,7 @@ class Indexer:
             print(f"ERROR: Scene not found. {thumbnail_path}")
 
         if scene.iloc[0]["tags"] is None:
-            tags = [tag]
+            tags = []
         else:
             tags = list(scene.iloc[0]["tags"])
 
@@ -315,7 +315,6 @@ class Indexer:
             self.table.update(where=f"thumbnail_path = '{thumbnail_path}'", values_sql={ "tags": f"make_array({quoted})" })
 
     def tag_clips(self, thumbnail_path_list, tags):
-        print(f"Tagging {thumbnail_path_list} with {tags}")
         for tag in tags:
             for thumbnail_path in thumbnail_path_list:
                 self.tag_clip(thumbnail_path, tag)
@@ -326,21 +325,12 @@ class Indexer:
 
     def untag_clip(self, thumbnail_path, tag):
         scene = self.table.search().where(f"thumbnail_path = '{thumbnail_path}'").to_pandas()
-        if scene.empty:
-            return "ERROR: Scene not found."
 
-        if scene.iloc[0]["tags"] is None:
-            return "ERROR: Tag not found on scene."
-
-        if tag not in scene.iloc[0]["tags"]:
-            return "ERROR: Tag not found on scene."
-
-        tags = list(scene.iloc[0]["tags"])
-        tags.remove(tag)
-
-        # NOTE: This is different than taggin because untag must be able to push an empty list to a row
-        quoted = ",".join(f"'{t}'" for t in tags)
-        self.table.update(where=f"thumbnail_path = '{thumbnail_path}'", values_sql={ "tags": f"make_array({quoted})" })
+        if not scene.empty and not scene.iloc[0]["tags"] is None and tag in scene.iloc[0]["tags"]:
+            tags = list(scene.iloc[0]["tags"])
+            tags.remove(tag)
+            quoted = ",".join(f"'{t}'" for t in tags)
+            self.table.update(where=f"thumbnail_path = '{thumbnail_path}'", values_sql={ "tags": f"make_array({quoted})" })
 
         self.purge_tags([tag])
 
