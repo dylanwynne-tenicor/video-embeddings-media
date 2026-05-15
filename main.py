@@ -311,7 +311,8 @@ class Indexer:
 
         if tag not in tags:
             tags.append(tag)
-            self.table.update(where=f"thumbnail_path = '{thumbnail_path}'", values={ "tags": tags })
+            quoted = ",".join(f"'{t}'" for t in tags)
+            self.table.update(where=f"thumbnail_path = '{thumbnail_path}'", values_sql={ "tags": f"make_array({quoted})" })
 
     def tag_clips(self, thumbnail_path_list, tags):
         for tag in tags:
