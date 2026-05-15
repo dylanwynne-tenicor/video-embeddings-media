@@ -12,7 +12,7 @@ Initialize workspace: `python main.py && mkdir input_videos`\
 Add videos to the input_videos folder now.
 
 *After setup*\
-Run: `cd Desktop/video-embeddings-media/ && source .venv/bin/activate`\
+Run: `cd Desktop/video-embeddings-media/ && source .venv/bin/activate`
 
 To index all videos in the input_videos folder, run: `python main.py`\
 (This will skip any videos that have already been indexed)
