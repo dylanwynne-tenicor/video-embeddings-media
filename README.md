@@ -25,6 +25,3 @@ To run the frontend app, run: `streamlit run app.py --server.headless true`\
 Setup ssh tunnel: `ssh -L 8501:localhost:8501 smeetsmacmini@Smeetss-Mac-mini.local`\
 (If prompted, type yes, then type the password)\
 Open the app in a browser. URL: `localhost:8501`
-
-*If TCP is working*\
-
