@@ -1,0 +1,10 @@
+# Dirs
+db/
+input_videos/
+archive/
+resources/thumbnails/
+__pycache__/
+.venv/
+
+# Files
+.DS_Store
