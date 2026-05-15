@@ -1,5 +1,5 @@
 # Requirements
-- Install Python3.11: https://www.python.org/downloads/release/python-3110/
+- Install Python3.11: https://www.python.org/downloads/release/python-3110/\
 - Install ffmpeg with brew (available through brew).
 
 # How to setup (on the Mac Mini)
