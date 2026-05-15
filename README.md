@@ -1,5 +1,5 @@
 # Requirements
-- Install Python3.11: https://www.python.org/downloads/release/python-3110/\
+- Install Python3.11: https://www.python.org/downloads/release/python-3110/
 - Install ffmpeg with brew (available through brew).
 
 # How to setup (on the Mac Mini)
@@ -12,6 +12,8 @@ Initialize workspace: `python main.py && mkdir input_videos`\
 Add videos to the input_videos folder now.
 
 *After setup*\
+Run: `cd Desktop/video-embeddings-media/ && source .venv/bin/activate`\
+
 To index all videos in the input_videos folder, run: `python main.py`\
 (This will skip any videos that have already been indexed)
 
@@ -23,3 +25,6 @@ To run the frontend app, run: `streamlit run app.py --server.headless true`\
 Setup ssh tunnel: `ssh -L 8501:localhost:8501 smeetsmacmini@Smeetss-Mac-mini.local`\
 (If prompted, type yes, then type the password)\
 Open the app in a browser. URL: `localhost:8501`
+
+*If TCP is working*\
+
